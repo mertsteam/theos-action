@@ -1,5 +1,5 @@
 - name: Setup Theos
-  uses: waruhachi/theos-action@v2.4.6   # ← kendi fork'un yerine orijinali kullan
+  uses: mertsteam/theos-action@v2.4.6   # ← kendi fork'un yerine orijinali kullan
   with:
     theos-src: 'theos/theos'
     theos-branch: 'main'
