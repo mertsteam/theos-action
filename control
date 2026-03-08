@@ -1,0 +1,9 @@
+Package: com.marina.asurabypass
+Name: Asura Bypass
+Version: 0.1
+Architecture: iphoneos-arm64
+Description: Bypasses AsuraMLB license check
+Maintainer: mert
+Author: M.A.R.I.N.A
+Section: Tweaks
+Depends: mobilesubstrate
