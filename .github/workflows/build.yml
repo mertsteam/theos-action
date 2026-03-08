@@ -1,9 +1,36 @@
-- name: Setup Theos
-  uses: mertsteam/theos-action@v2.4.6   # ← kendi fork'un yerine orijinali kullan
-  with:
-    theos-src: 'theos/theos'
-    theos-branch: 'main'
-    sdks-src: 'theos/sdks'
-    sdks-branch: 'master'
-    libgcuniversal: 'true'
-    altlist: 'true'
+name: Build AsuraBypass
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Theos
+        uses: waruhachi/theos-action@v2.4.6
+        with:
+          theos-src: 'theos/theos'
+          theos-branch: 'main'
+          sdks-src: 'theos/sdks'
+          sdks-branch: 'master'
+          libgcuniversal: 'true'
+          altlist: 'true'
+
+      - name: Build Tweak
+        run: |
+          make clean
+          make package FINALPACKAGE=1
+          make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AsuraBypass-Artifacts
+          path: packages/*.deb
